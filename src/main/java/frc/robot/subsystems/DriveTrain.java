@@ -20,18 +20,21 @@ import frc.robot.Constants;
 
 import com.kauailabs.navx.frc.AHRS;
 
+//The DriveTrain is a physical part of the robot. The subsystem is translating part of the robot into a class
 public class DriveTrain extends SubsystemBase 
 {
   private final WPI_TalonSRX leftDriveTalon;
   private final WPI_TalonSRX rightDriveTalon;
-
+  //Initializes the talons
   private AHRS navx = new AHRS(SPI.Port.kMXP);
-
+  //Initializes the nav system
   private ShuffleboardTab DTTab = Shuffleboard.getTab("DriveTrain");
+  //Initializes the Shuffleboard which is basically the display system. It allows for you to view various robot stats
   private GenericEntry LeftVoltage = DTTab.add("Left Voltage", 0.0).getEntry();
   private GenericEntry RightVoltage = DTTab.add("Right Voltage", 0.0).getEntry();
 
   /** Creates a new DriveTrain */
+  //Constructor
   public DriveTrain() 
   {
     leftDriveTalon = new WPI_TalonSRX(Constants.DriveTrainPorts.LeftDriveTalonPort);
@@ -56,6 +59,7 @@ public class DriveTrain extends SubsystemBase
   public void tankDrive(double leftSpeed, double rightSpeed) {
     rightDriveTalon.set(rightSpeed);
     leftDriveTalon.set(leftSpeed);
+    //Sets the talon power
   }
 
   public void resetEncoders() {
@@ -77,6 +81,7 @@ public class DriveTrain extends SubsystemBase
 
   @Override
   public void periodic() {
+    //Displays data onto the Shuffleboard (SmartDashboard is outdated). Runs every 2ms
     SmartDashboard.putNumber("Left Voltage", leftDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("Right Voltage", rightDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("Angle", navx.getAngle());
