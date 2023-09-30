@@ -37,7 +37,7 @@ public class TankDrive extends CommandBase {
 
     double rightPowerRaw = joy.getRawAxis(5);
 
-    dt.tankDrive(leftPowerRaw*-0.7, rightPowerRaw*-0.7);
+    dt.tankDrive(leftPowerRaw*0.7, rightPowerRaw*0.7);
   }//Runs the code to drive the robot. It makes the joystick power/position proportional to the talon power.
 
   // Called once the command ends or is interrupted.
