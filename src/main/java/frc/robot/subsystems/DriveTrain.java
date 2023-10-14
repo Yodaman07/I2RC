@@ -56,12 +56,6 @@ public class DriveTrain extends SubsystemBase
 
   }
 
-  public void tankDrive(double leftSpeed, double rightSpeed) {
-    rightDriveTalon.set(rightSpeed);
-    leftDriveTalon.set(leftSpeed);
-    //Sets the talon power
-  }
-
   public void resetEncoders() {
     leftDriveTalon.setSelectedSensorPosition(0,0,10);
     rightDriveTalon.setSelectedSensorPosition(0,0,10);
@@ -70,6 +64,7 @@ public class DriveTrain extends SubsystemBase
   public double getTicks() {
     return (leftDriveTalon.getSelectedSensorPosition(0) + rightDriveTalon.getSelectedSensorPosition(0)) / 2.0;
   }
+
  
   public double getAngle(){
     return navx.getAngle(); 
@@ -88,6 +83,5 @@ public class DriveTrain extends SubsystemBase
 
     LeftVoltage.setDouble(leftDriveTalon.getMotorOutputPercent());
     RightVoltage.setDouble(rightDriveTalon.getMotorOutputPercent());
-
   }
 }

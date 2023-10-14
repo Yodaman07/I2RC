@@ -8,8 +8,6 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -25,38 +23,21 @@ public class RobotContainer {
   private final Joystick joy1 = new Joystick(Constants.USBOrder.Zero);
 
   private final DriveTrain dt = new DriveTrain();
-
-  private final TankDrive tankDrive = new TankDrive(dt, joy1);
-
-  private final AutoDrive autoDrive = new AutoDrive(dt, 1);
+  private final PIDTurn pid = new PIDTurn(dt, 90.0f);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    dt.setDefaultCommand(tankDrive);
+    dt.setDefaultCommand(pid);
     // Configure the trigger bindings
     configureBindings();
   }
 
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
-   */
   private void configureBindings() {
  
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return autoDrive;
+    return pid;
   }
 }
