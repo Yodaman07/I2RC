@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 
@@ -9,15 +10,15 @@ public class PIDTurn extends CommandBase {
     public DriveTrain dt;
     public double setPointAngle;
     public int motorSign;
-    public PIDController pidController = new PIDController((0.3/90),0,0);
-    //(0.3/90)
+    public final double Tolerance = Constants.MiscConstants.PIDTolerance;
+    public PIDController pidController = new PIDController(Constants.MiscConstants.KP,0,0);
     //P constant: divide power of motor by max error
     //Max error is the setpoint from 0
 
     public PIDTurn(DriveTrain dt, float setPointAngle) {
         this.dt = dt;
         this.setPointAngle = setPointAngle;
-        pidController.setTolerance(5.0);
+        pidController.setTolerance(Tolerance);
 
         if (setPointAngle > 0){
             //counter-clockwise rotation

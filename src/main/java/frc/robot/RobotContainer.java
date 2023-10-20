@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
@@ -23,11 +24,10 @@ public class RobotContainer {
   private final Joystick joy1 = new Joystick(Constants.USBOrder.Zero);
 
   private final DriveTrain dt = new DriveTrain();
-  private final PIDTurn pid = new PIDTurn(dt, 360.0f);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    dt.setDefaultCommand(pid);
+    dt.setDefaultCommand(getAutonomousCommand());
     // Configure the trigger bindings
     configureBindings();
   }
@@ -38,6 +38,14 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return pid;
+    return new SequentialCommandGroup(
+            new EncoderDrive(dt, 1),
+            new PIDTurn(dt, 90.0f),
+            new EncoderDrive(dt, 1),
+            new PIDTurn(dt, 90.0f),
+            new EncoderDrive(dt, 1),
+            new PIDTurn(dt, 90.0f),
+            new EncoderDrive(dt, 1)
+      );
   }
 }

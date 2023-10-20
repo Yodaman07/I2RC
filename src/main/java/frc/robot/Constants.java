@@ -22,4 +22,13 @@ public final class Constants {
         public static final int Zero = 0;
         public static final int One = 1;
     }
+
+    public static final class MiscConstants{
+        public static final double MotorPowerMultiplier = 0.7f;
+        public static final int EncoderTicksPerRev = 4096;
+        public static final double WheelDiameter = 5.75;
+        // ^^ inches
+        public static final double KP = (0.3/90);
+        public static final double PIDTolerance = 5.0;
+    }
 }
