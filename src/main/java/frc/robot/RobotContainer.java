@@ -23,7 +23,7 @@ public class RobotContainer {
   private final Joystick joy1 = new Joystick(Constants.USBOrder.Zero);
 
   private final DriveTrain dt = new DriveTrain();
-  private final PIDTurn pid = new PIDTurn(dt, 90.0f);
+  private final PIDTurn pid = new PIDTurn(dt, 360.0f);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {

@@ -17,11 +17,14 @@ public class PIDTurn extends CommandBase {
     public PIDTurn(DriveTrain dt, float setPointAngle) {
         this.dt = dt;
         this.setPointAngle = setPointAngle;
+        pidController.setTolerance(5.0);
 
-        if (motorSign == 1){
+        if (setPointAngle > 0){
             //counter-clockwise rotation
+            motorSign = 1;
         }else{
             //clockwise rotation
+            motorSign = -1;
         }
 
         // each subsystem used by the command must be passed into the
@@ -33,23 +36,25 @@ public class PIDTurn extends CommandBase {
     @Override
     public void initialize() {
         dt.resetNavx();
+        dt.tankDrive(0,0);
         //Navx is a sensor that gets the angle of the robot
 
     }
 
     @Override
     public void execute() {
-
+        double output = pidController.calculate(dt.getAngle(), setPointAngle);
+        //current angle and desired angle of robot are params of pidController.calculate
+        dt.tankDrive(-output*motorSign,output*motorSign);
     }
 
     @Override
     public boolean isFinished() {
-        // TODO: Make this return true when this Command no longer needs to run execute()
-        return false;
+        return pidController.atSetpoint();
     }
 
     @Override
     public void end(boolean interrupted) {
-
+        dt.tankDrive(0,0);
     }
 }

@@ -56,6 +56,12 @@ public class DriveTrain extends SubsystemBase
 
   }
 
+  public void tankDrive(double leftSpeed, double rightSpeed) {
+    rightDriveTalon.set(rightSpeed);
+    leftDriveTalon.set(leftSpeed);
+    //Sets the talon power
+  }
+
   public void resetEncoders() {
     leftDriveTalon.setSelectedSensorPosition(0,0,10);
     rightDriveTalon.setSelectedSensorPosition(0,0,10);
