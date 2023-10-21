@@ -47,5 +47,15 @@ public class RobotContainer {
             new PIDTurn(dt, 90.0f),
             new EncoderDrive(dt, 1)
       );
+    //Square
+
+//    return new SequentialCommandGroup(
+//        new EncoderDrive(dt, 1),
+//        new PIDTurn (dt, 120.0f),
+//        new EncoderDrive(dt, 1),
+//        new PIDTurn (dt, 120.0f),
+//        new EncoderDrive(dt, 1)
+//     );
+    //Triangle
   }
 }
